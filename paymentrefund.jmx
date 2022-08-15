@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4.1">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">30</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">10</stringProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">10</stringProp>
+        <stringProp name="ThreadGroup.delay">2</stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Payment" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#xd;
+&lt;NABTransactMessage&gt;&#xd;
+&lt;MessageInfo&gt;&#xd;
+&lt;messageID&gt;d9f4da0ace7caad3f92ffc984ad76&lt;/messageID&gt;&#xd;
+&lt;messageTimestamp&gt;20160309235825000000+600&lt;/messageTimestamp&gt;&#xd;
+&lt;timeoutValue&gt;60&lt;/timeoutValue&gt;&#xd;
+&lt;apiVersion&gt;xml-4.2&lt;/apiVersion&gt;&#xd;
+&lt;/MessageInfo&gt;&#xd;
+&lt;MerchantInfo&gt;&#xd;
+&lt;merchantID&gt;ZZZ2155&lt;/merchantID&gt;&#xd;
+&lt;password&gt;Q0f61VPC&lt;/password&gt;&#xd;
+&lt;/MerchantInfo&gt;&#xd;
+&lt;RequestType&gt;Payment&lt;/RequestType&gt;&#xd;
+&lt;Payment&gt;&#xd;
+&lt;TxnList count=&quot;1&quot;&gt;&#xd;
+&lt;Txn ID=&quot;1&quot;&gt;&#xd;
+&lt;txnKey/&gt;&#xd;
+&lt;txnType&gt;0&lt;/txnType&gt;&#xd;
+&lt;txnSource&gt;23&lt;/txnSource&gt;&#xd;
+&lt;amount&gt;100&lt;/amount&gt;&#xd;
+&lt;currency&gt;AUD&lt;/currency&gt;&#xd;
+&lt;purchaseOrderNo&gt;peformances${__Random(0,5000000)}&lt;/purchaseOrderNo&gt;&#xd;
+&lt;CreditCardInfo&gt;&#xd;
+&lt;cardNumber&gt;4444333322221111&lt;/cardNumber&gt;&#xd;
+&lt;expiryDate&gt;01/23&lt;/expiryDate&gt;&#xd;
+&lt;cvv&gt;123&lt;/cvv&gt;&#xd;
+&lt;cardType&gt;Visa&lt;/cardType&gt;&#xd;
+&lt;cardHolderName&gt;tester&lt;/cardHolderName&gt;&#xd;
+&lt;xID&gt;90803908852131001388&lt;/xID&gt;&#xd;
+&lt;DirectoryServerTransactionId&gt;047675a3-0bd8-47b1-979a-7b9d1f72c8e5&lt;/DirectoryServerTransactionId&gt;&#xd;
+&lt;ThreedsServerTransactionID&gt;&lt;/ThreedsServerTransactionID&gt;&#xd;
+&lt;CAVV&gt;kNcqgxj7vs/9kqdocswbjrjvovou&lt;/CAVV&gt;&#xd;
+&lt;SLI&gt;05&lt;/SLI&gt;&#xd;
+&lt;PARes&gt;A&lt;/PARes&gt;&#xd;
+&lt;VERes&gt;Y&lt;/VERes&gt;&#xd;
+&lt;MpiECI/&gt;&#xd;
+&lt;/CreditCardInfo&gt;&#xd;
+&lt;/Txn&gt;&#xd;
+&lt;/TxnList&gt;&#xd;
+&lt;/Payment&gt;&#xd;
+&lt;/NABTransactMessage&gt;</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">stg-api.securepay.com.au</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/xmlapi/payment</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+            <stringProp name="ConstantTimer.delay">2000</stringProp>
+          </ConstantTimer>
+          <hashTree/>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>true</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="StatGraphVisualizer" testclass="ResultCollector" testname="Aggregate Graph" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">txnid</stringProp>
+            <stringProp name="RegexExtractor.regex">&lt;txnID&gt;(.+)&lt;/txnID&gt;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">ponum</stringProp>
+            <stringProp name="RegexExtractor.regex">&lt;purchaseOrderNo&gt;(.+)&lt;/purchaseOrderNo&gt;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="refund" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#xd;
+&lt;SecurePayMessage&gt;&#xd;
+&lt;MessageInfo&gt;&#xd;
+ &lt;messageID&gt;8af793f9af34bea0cf40f5fb750f50&lt;/messageID&gt;&#xd;
+ &lt;messageTimestamp&gt;20142303111214383000+660&lt;/messageTimestamp&gt;&#xd;
+ &lt;timeoutValue&gt;60&lt;/timeoutValue&gt;&#xd;
+ &lt;apiVersion&gt;xml-4.2&lt;/apiVersion&gt;&#xd;
+&lt;/MessageInfo&gt;&#xd;
+&lt;MerchantInfo&gt;&#xd;
+ &lt;merchantID&gt;ZZZ2155&lt;/merchantID&gt;&#xd;
+ &lt;password&gt;Q0f61VPC&lt;/password&gt;&#xd;
+&lt;/MerchantInfo&gt;&#xd;
+&lt;RequestType&gt;Payment&lt;/RequestType&gt;&#xd;
+&lt;Payment&gt;&#xd;
+ &lt;TxnList count=&quot;1&quot;&gt;&#xd;
+ &lt;Txn ID=&quot;1&quot;&gt;&#xd;
+ &lt;txnType&gt;4&lt;/txnType&gt;&#xd;
+ &lt;txnSource&gt;23&lt;/txnSource&gt;&#xd;
+ &lt;txnID&gt;${txnid}&lt;/txnID&gt;&#xd;
+ &lt;amount&gt;100&lt;/amount&gt;&#xd;
+ &lt;purchaseOrderNo&gt;${ponum}&lt;/purchaseOrderNo&gt;&#xd;
+ &lt;/Txn&gt;&#xd;
+ &lt;/TxnList&gt;&#xd;
+&lt;/Payment&gt;&#xd;
+&lt;/SecurePayMessage&gt;</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">stg-api.securepay.com.au</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/xmlapi/payment</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+        <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+          <stringProp name="scriptLanguage">java</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="script">import java.util.Random;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.validator.routines.checkdigit.LuhnCheckDigit;
+
+String[] amounts = (vars.get(&quot;amounts&quot;)).split(&quot;,&quot;);
+
+int index = new Random().nextInt(amounts.length);
+String amount = (amounts[index]);
+
+vars.put(&quot;amount&quot;, amount);
+
+String cardNumberBin = (vars.get(&quot;cardNumberBin&quot;));
+String randomCardNumber = cardNumberBin + RandomStringUtils.random(10, false, true);
+
+Boolean isValidCard = false;
+int randomNumberGenerationCount = 1;
+while(!isValidCard) {
+  if (!LuhnCheckDigit.LUHN_CHECK_DIGIT.isValid(randomCardNumber)) {
+  	randomCardNumber = cardNumberBin + RandomStringUtils.random(10, false, true);
+  	randomNumberGenerationCount++;
+  } else {  	
+  	isValidCard = true;
+  	break;
+  }
+}
+log.info(&quot;**** Card number : &quot; + randomCardNumber + &quot; / Random() calling count to get Luhn check passed : &quot; + randomNumberGenerationCount);
+
+vars.put(&quot;cardNumber&quot;, randomCardNumber);
+
+</stringProp>
+        </JSR223PreProcessor>
+        <hashTree/>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="amounts" elementType="Argument">
+              <stringProp name="Argument.name">amounts</stringProp>
+              <stringProp name="Argument.value">11406</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="cardNumberBin" elementType="Argument">
+              <stringProp name="Argument.name">cardNumberBin</stringProp>
+              <stringProp name="Argument.value">4444333322221111</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
