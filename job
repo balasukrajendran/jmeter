@@ -1,0 +1,44 @@
+jenkins:
+execute shell:
+ssh -oBatchMode=true -oLogLevel=ERROR svc_automation@${server} /bin/bash /home/svc_automation/MNT/mnt1011/archive.sh
+ssh -oBatchMode=true -oLogLevel=ERROR svc_automation@${server} /bin/bash /home/svc_automation/MNT/mnt1011/mnt1011.sh
+scp -r -oBatchMode=true -oLogLevel=ERROR svc_automation@${server}:/home/svc_automation/MNT/mnt1011/reports .
+
+Publish html report:
+HTML directory to archive: reports/mnt1011.report.jtl
+-------------------------------------
+archive.sh:
+#!/bin/bash
+
+#VARIABLES
+PROJ_ROOT=/home/svc_automation/MNT/mnt1011
+DATE=$(date +%d%m%y)
+TIME=$(date +%H%M)
+LOGARCHIVE="$PROJ_ROOT/archive/logs"
+RPTARCHIVE="$PROJ_ROOT/archive/reports"
+LOG="$PROJ_ROOT/logs"
+REPORT="$PROJ_ROOT/reports" 
+
+#Move and rename the log file
+mv $LOG/log.csv $LOGARCHIVE/log$DATE-$TIME.csv
+
+#Move and rename the jtl report
+mv $REPORT/mnt1011.report.jtl $RPTARCHIVE/mnt1011.report$DATE-$TIME.jtl
+
+echo $LOGARCHIVE
+echo $RPTARCHIVE
+echo $LOG
+--------------------------
+mnt1011.sh:
+#!/bin/bash
+
+set -euo pipefail
+
+OUT=jmeter.save.saveservice.output_format
+JMX=/data/perftest/apache-jmeter-5.2.1/bin/MNT/mnt1011/antifraudpayment.jmx
+#RPT=./reports/
+JTL=/home/svc_automation/MNT/mnt1011/reports/mnt1011.report.jtl
+LOG=/home/svc_automation/MNT/mnt1011/logs/log.csv
+/data/perftest/apache-jmeter-5.2.1/bin/jmeter.sh -n -t $JMX -l $LOG -e -o $JTL
+
+
